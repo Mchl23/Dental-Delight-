@@ -1,0 +1,167 @@
+<ClickableTextFieldRound>:
+    size_hint_y: None
+    height: text_field.height
+
+    MDTextField:
+        id: text_field
+        hint_text: root.hint_text
+        text: root.text
+        password: True
+        icon_left: "key-variant"
+        required: True
+        helper_text_mode: 'on_error'
+        helper_text: 'Enter a password'
+
+    MDIconButton:
+        icon: "eye-off"
+        pos_hint: {"center_y": .5}
+        pos: text_field.width - self.width + dp(8), 0
+        theme_text_color: "Hint"
+        on_release:
+            self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+            text_field.password = False if text_field.password is True else True
+<MainLayout>:
+    orientation: 'vertical'
+    MDTopAppBar:
+        title: 'Navigation Bar'
+        left_action_items: [['menu']]
+        right_action_items: [['dots-vertical'],['theme-light-dark', lambda x: root.kivytheme(app)]]
+        md_bg_color: 252/255, 3/255, 148/255,1
+    MDBottomNavigation:
+        MDBottomNavigationItem:
+            name: 'screen 1'
+            text: 'Home'
+            icon: 'home'
+
+            MDLabel: 
+                text: 'Welcome to KivyMD'
+                halign:'center'
+                font_size: 55
+                theme_text_color: 'Custom'
+                text_color: app.theme_cls.primary_color
+        MDBottomNavigationItem:
+            name: 'screen 2'
+            text: 'Search'
+            icon: 'magnify'
+            MDLabel:
+                text: 'KivyMD Buttons'
+                font_size: 55
+                halign: 'center'
+                pos_hint: {'center_x':0.5 , 'center_y':.90 }
+
+            FloatLayout:
+                spacing: 100
+                MDIconButton:
+                    icon: 'facebook'
+                    icon_size: '55sp'
+                    theme_icon_color: 'Custom'
+                    icon_color: app.theme_cls.primary_color
+                    pos_hint: {'center_x': .15  , 'center_y': .75 }
+                MDLabel:
+                    text: 'MDIconButton'
+                    pos_hint: {'center_x': .15  , 'center_y': .67 }
+                    halign: 'center'
+                    theme_text_color: 'Custom'
+                    text_color: app.theme_cls.primary_color
+                MDFloatingActionButton:
+                    icon: 'facebook'
+                    pos_hint: {'center_x': .5  , 'center_y': .75 }
+                MDLabel:
+                    text: 'MDFloatingActionButton'
+                    pos_hint: {'center_x': .50  , 'center_y': .65 }
+                    halign: 'center'
+                    theme_text_color: 'Custom'
+                    text_color: app.theme_cls.primary_color
+                MDFlatButton:
+                    text: 'Click Me'
+                    font_size: '24sp'
+                    md_bg_color: 171/255, 17/255, 209/255,1
+                    pos_hint: {'center_x': .80  , 'center_y': .75}
+                MDLabel:
+                    text: 'MDFlatButton'
+                    pos_hint: {'center_x': .80  , 'center_y': .65 }
+                    halign: 'center'
+                    theme_text_color: 'Custom'
+                    text_color: app.theme_cls.primary_color
+
+
+        MDBottomNavigationItem:
+            name: 'screen 3'
+            text: 'Add'
+            icon: 'plus'
+            MDLabel:
+                text: 'KivyMD Text Input'
+                font_size: 55
+                halign: 'center'
+                pos_hint: {'center_x':0.5 , 'center_y':.95}
+
+            BoxLayout:
+                orientation: 'vertical'
+                padding: dp(150)
+                spacing: dp(30)
+                MDTextField:
+                    hint_text: 'Email'
+                    text: 'mpalapar2@gmail.com'
+                    validator: 'email'
+                    mode: 'rectangle'
+                    helper_text_mode: 'on_error'
+                    helper_text: 'Enter a valid email'
+                    required: True
+                ClickableTextFieldRound:
+                    hint_text: 'Password'
+                    text:'mchl23'
+                    required: True
+                    password: True
+                    helper_text_mode: 'on_error'
+                    helper_text: 'Enter a password'
+                MDTextField:
+                    hint_text: "6-Digit"
+                    text: '052303'
+                    mode: 'rectangle'
+                    input_filter: 'int'
+                    max_text_length: 6
+                    helper_text_mode: 'on_error'
+                    helper_text: 'Enter a 6 Digit Number'
+                    required: True
+        MDBottomNavigationItem:
+            name: 'screen 4'
+            text: 'Inbox'
+            icon: 'message'
+            MDLabel:
+                text: 'KivyMD Dialog'
+                font_size: 55
+                halign: 'center'
+                pos_hint: {'center_x':0.5 , 'center_y':.90}
+            MDFlatButton:
+                text: "Button Dialog"
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release: root.show_alert_dialog()
+                md_bg_color: 171/255, 17/255, 209/255,1
+
+
+        
+        MDBottomNavigationItem:
+            id: screen
+            name: 'screen 5'
+            text: 'Notification'
+            icon: 'bell'
+            MDLabel:
+                text: 'Notification'
+                font_size: 55
+                halign: 'center'
+                pos_hint: {'center_x':0.5 , 'center_y':.90}
+            MDFlatButton:
+                text: "Spam CLick"
+                on_release: root.clickspam()
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                md_bg_color: 171/255, 17/255, 209/255,1 
+            MDFlatButton:
+                text: "Clear Notif"
+                on_release: root.notif()
+                pos_hint: {'center_x': .5, 'center_y': .7}
+                md_bg_color: 171/255, 17/255, 209/255,1
+
+
+
+
+        
